@@ -1,0 +1,116 @@
+<div class="container">
+  <div class="ordem-compra" *ngIf="idPedidoCompra === undefined">
+
+    <form novalidate>
+
+
+      <div *ngIf='getTotal() == 0'>
+        <div class="alert alert-danger mb-5" role="alert">
+          Ainda não há produtos no seu carrinho!
+        </div>
+      </div>
+
+
+      <div class="table-responsive-lg">
+        <h5>Sua Compra</h5>
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th class="">Produto</th>
+              <th class="text-left">Valor</th>
+              <th class="text-left">Remover</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let produto of listaProdutos">
+            <tr>
+              <td>
+                <div class="media">
+                  <img class="media-object thumbnail pull-left" src="{{produto.imagem}}"
+                  alt="{{produto.descricaoProduto}}" style="width: 72px; height: 72px;">
+                  <div class="media-body ml-3">
+                    <h4 class="media-heading">{{produto.nome}}</h4>
+                    <span><strong>Informações: </strong></span><span>{{produto.descricaoProduto}}</span>
+                  </div>
+                </div>
+              </td>
+              <td><strong>{{produto.valor | currency: 'BRL': true }}</strong></td>
+              <td>
+                <button type="button" class="btn btn-link align-top p-0 ml-4" (click)="Remover(produto)">
+                  <fa-icon [icon]="faTimesCircle" style="color: black;"></fa-icon>
+                </button>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr>
+              <td class="text-right">
+                <h5>Total:</h5>
+              </td>
+              <td class="text-left">
+                <h5><strong>{{ getTotal() | currency: 'BRL': true }}</strong></h5>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h5 class="mt-5">Dados de entrega</h5>
+      <hr />
+
+      <div class="form-row">
+
+        <div class="form-group col-md-4">
+          <!-- teste ternário verifica qual classe css vai ser aplicada -->
+          <input type="text"
+            class="form-control {{ enderecoEstadoPrimitivo ? '' : (enderecoValido ? 'is-valid' : 'is-invalid') }} "
+            placeholder="Informe o seu CEP (Apenas números)" autocomplete="off" minlength="8" required
+            [value]="endereco" #inputEndereco (input)="atualizaEndereco(inputEndereco.value)">
+          <div class="invalid-feedback">Necessário 8 dígitos (Apenas números)</div>
+        </div>
+
+        <div class="form-group col-md-6">
+          <input type="text"
+            class="form-control {{ numeroEstadoPrimitivo ? '' : (numeroValido ? 'is-valid' : 'is-invalid') }}"
+            placeholder="Informe o seu endereço completo (Nome e número)" autocomplete="off" minlength="5" required
+            [value]="numero" #inputNumero (input)="atualizaNumero(inputNumero.value)">
+          <div class="invalid-feedback">Necessário no mínimo 5 caracteres (Letras ou números)</div>
+        </div>
+
+        <div class="form-group col-md-2">
+          <input type="text" class="form-control {{ complementoValido ? 'is-valid' : '' }}" placeholder="Complemento"
+            autocomplete="off" [value]="complemento" #inputComplemento
+            (input)="atualizaComplemento(inputComplemento.value)">
+        </div>
+
+      </div>
+      <br />
+
+      <h5>Dados de pagamento</h5>
+      <hr />
+
+      <div class="form-row">
+
+        <div class="form-group col-md-3">
+          <select
+            class="custom-select {{ formaPagamentoEstadoPrimitivo ? '' : (formaPagamentoValido ? 'is-valid' : 'is-invalid') }} "
+            #selectFormaPagamento (change)="atualizaFormaPagamento(selectFormaPagamento.value)">
+            <option value=''>Selecione uma opção</option>
+            <option value='boleto' selected="{{ formaPagamento == 'boleto' ? 'selected' : '' }}">Boleto</option>
+            <option value='debito' selected="{{ formaPagamento == 'debito' ? 'selected' : '' }}">Débito</option>
+            <option value='credito' selected="{{ formaPagamento == 'credito' ? 'selected' : '' }}">Crédito</option>
+          </select>
+
+          <div class="invalid-feedback">Selecione uma forma de pagamento</div>
+        </div>
+      </div>
+
+      <hr />
+      <div *ngIf='getTotal() !== 0'>
+        <button type="button" class="btn btn-get btn-lg" [disabled]="formEstado" (click)="confirmarCompra()">Confirmar
+          pedido</button></div>
+    </form>
+  </div>
+  <div class="ordem-compra" *ngIf="(idPedidoCompra !== undefined)">
+    <app-ordem-compra-sucesso [idPedidoCompra]=idPedidoCompra></app-ordem-compra-sucesso>
+  </div>
+</div>

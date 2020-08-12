@@ -1,0 +1,111 @@
+<div class="container">
+  
+  
+  <form class="my-5" novalidate #formulario="ngForm" (ngSubmit)="(formulario)">
+    
+    <h2 class="h1-responsive font-weight-bold text-center mx-auto py-5"></h2>
+    
+    <div class="row">
+      
+      <div class="col-lg-5 mb-lg-0 mb-4">
+        
+        <div class="card">
+          <div class="card-body headerdoformulario">
+            <!-- Header do Formulário -->
+            <div class="form-header">
+              <h3 class="mt-2">
+                <fa-icon [icon]="faEnvelope"></fa-icon> Entre em Contato
+              </h3>
+            </div>
+            <p>Preencha o formulário Abaixo:</p>
+            <!-- Corpo do Formulário -->
+            <div class="form-group">
+              <label>Nome</label>
+              <input class="form-control" #inputnome="ngModel" name="nome" minlength="3" required ngModel
+              placeholder="Insira seu nome">
+              <small *ngIf="inputnome.valid && inputnome.touched" class="form-text text-success">ok</small>
+              <small *ngIf="!inputnome.valid && inputnome.touched" class="form-text text-danger">Nome inválido</small>
+            </div>
+            <div class="form-group">
+              <label for="#">E-mail</label>
+              <input class="form-control" #inputemail="ngModel" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required ngModel
+              placeholder="nome@example.com">
+              <small *ngIf="inputemail.valid && inputemail.touched" class="form-text text-success">ok</small>
+              <small *ngIf="!inputemail.valid && inputemail.touched" class="form-text text-danger">Email
+                invalido</small>
+              </div>
+              <div class="form-group">
+                <label for="#">Assunto</label>
+                <select class="form-control" #selectOpcao="ngModel" name="opcao" ngModel required>
+                  <option value="">Escolha sua opção</option>
+                  <option value="1">Quero Doar um móvel</option>
+                  <option value="2">Quero reformar meu móvel</option>
+                  <option value="3">Sugestões</option>
+                  <option value="4">Duvidas na compra</option>
+                  <option value="5">Outras informações</option>
+                </select>
+                <small *ngIf="selectOpcao.valid && selectOpcao.touched" class="form-text text-success">ok</small>
+                <small *ngIf="!selectOpcao.valid && selectOpcao.touched" class="form-text text-danger">Opção
+                  Inválida</small>
+                </div>
+                <div class="md-form">
+                  <label for="form-text">Mensagem</label>
+                  <i class="fas fa-pencil-alt prefix grey-text"></i>
+                  <textarea class="form-control" name="mensagem" ngModel #inputMensagem="ngModel" minlength="5"
+                  maxlength="150" placeholder="Como podemos ajudar?" required></textarea>
+                  <small *ngIf="inputMensagem.valid && inputMensagem.touched" class="form-text text-success">ok</small>
+                  <small *ngIf="!inputMensagem.valid && inputMensagem.touched" class="form-text text-danger">Mensagem
+                    inválida</small>
+                  </div>
+                  <div class="text-center mt-4">
+                    <button class="btn btn-get" type="submit" name="sbt" value="Enviar" id="btnEnviar"
+                    (click)='EnviarFormulario()'>ENVIAR</button>
+                  </div>
+                </div>
+              </div>
+              <!-- Fim do Formulário -->
+              
+            </div>
+            
+            <div class="col-lg-7">
+              
+              <!--Mapa do Google -->
+              <div id="map-container-section" class="z-depth-1-half map-container-section mb-4" style="height: 400px">
+                <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3658.1241452609834!2d-46.69399738502288!3d-23.528036884699503!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cef8775663b04f%3A0x923835e9005f8309!2sSenac%20Lapa%20Tito!5e0!3m2!1spt-BR!2sbr!4v1592535000543!5m2!1spt-BR!2sbr"
+                frameborder="0" style="border:0" allowfullscreen></iframe>
+              </div>
+              <!-- Botoes-->
+              <div class="row text-center">
+                <div class="col-md-4">
+                  <a class="">
+                    <fa-icon [icon]="faMapMarkerAlt" class="faMapMakerAlt fa-2x"></fa-icon>
+                  </a>
+                  <p>Rua Tito, 54</p>
+                  <p class="mb-md-0">São Paulo</p>
+                </div>
+                <div class="col-md-4">
+                  <a>
+                    <fa-icon [icon]="faPhone" class="faPhone fa-2x"></fa-icon>
+                  </a>
+                  <p>(11) 1234-5678</p>
+                  <p class="mb-md-0">Seg - Sex, 8:00-18:00</p>
+                </div>
+                <div class="col-md-4">
+                  <a>
+                    <fa-icon [icon]="faEnvelope" class="faEnvelope fa-2x"></fa-icon>
+                  </a>
+                  <p>doacaogetmoveis6@gmail.com</p>
+                  <p class="mb-0">getmoveis6@gmail.com</p>
+                </div>
+              </div>
+              
+            </div>
+            
+            
+          </div>
+          
+          
+        </form>
+        
+      </div>

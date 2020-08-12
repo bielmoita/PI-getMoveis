@@ -1,0 +1,26 @@
+.btn{
+    cursor: pointer;
+}
+
+.grow:hover
+{
+        -webkit-transform: scale(1.3);
+        -ms-transform: scale(1.3);
+        transform: scale(1.3);
+        -moz-transition: .5s all ease;
+    transition: .5s all ease;
+}
+
+a{
+    color: #000;
+}
+
+@media (max-width: 768px) {
+    .fotoModal{
+    display: none;
+}
+.nossahistoria {
+    margin-top: 70px !important;
+}
+
+}
